@@ -12,6 +12,9 @@ import { appendTo } from "./utils.js";
 let $app = document.getElementById('app');
 appendTo($app, new IndexScreen());
 
+import data from './data/food.js';
+console.log(data);
+
 // $app.append(new RegisterScreen().render()); // render 1 lần duy nhất
 
 // let hello = document.getElementById('hello');
