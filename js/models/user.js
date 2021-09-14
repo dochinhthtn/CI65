@@ -1,11 +1,23 @@
 export async function register(name, email, password) {
-    let response = await auth.createUserWithEmailAndPassword(email, password); // xảy ra hiện tượng bất đồng bộ
-    console.log(response);
-    console.log("Register successfully");
-    console.log(auth.currentUser);
+
+    try {
+        let response = await auth.createUserWithEmailAndPassword(email, password); // xảy ra hiện tượng bất đồng bộ
+        console.log(response);
+        console.log("Register successfully");
+        console.log(auth.currentUser);
+    } catch(error) {
+        alert(error.message);
+    }
 }
 
-export function login(email, password) {
+export async function login(email, password) {
+
+    try {
+        await auth.signInWithEmailAndPassword(email, password);
+        console.log('Sign in successfully');
+    } catch(error) {
+        alert(error.message);
+    }
 
 }
 

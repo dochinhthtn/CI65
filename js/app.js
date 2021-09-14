@@ -3,13 +3,14 @@
 // + dùng đi dùng lại: 
 // + xử lý độc lập
 
+import IndexScreen from "./screens/IndexScreen.js";
 import LoginScreen from "./screens/LoginScreen.js";
 import RegisterScreen from "./screens/RegisterScreen.js";
+
 import { appendTo } from "./utils.js";
 
-
 let $app = document.getElementById('app');
-appendTo($app, new RegisterScreen());
+appendTo($app, new IndexScreen());
 
 // $app.append(new RegisterScreen().render()); // render 1 lần duy nhất
 
@@ -21,3 +22,6 @@ appendTo($app, new RegisterScreen());
 // document.replaceChild(hello, $h2);
 
 // console.log(hello);
+
+// NavigoJS (v7)
+// React -> React Router / React Router DOM

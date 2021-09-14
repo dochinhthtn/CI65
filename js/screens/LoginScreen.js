@@ -1,5 +1,6 @@
 import BaseComponent from "../BaseComponent.js";
 import InputWrapper from "../components/InputWrapper.js";
+import { login } from "../models/user.js";
 
 import { appendTo, validateEmail } from "../utils.js";
 
@@ -92,12 +93,21 @@ export default class LoginScreen extends BaseComponent {
         errors.email = '';
         errors.password = '';
 
+        let isPassed = true;
+
         if (data.email == '' || !validateEmail(data.email)) {
             errors.email = 'Invalid email';
+            isPassed = false;
         }
 
         if (data.password == '') {
             errors.password = "Invalid password";
+            isPassed = false;
+        }
+
+        if(isPassed) {
+            login(data.email, data.password);
+            return;
         }
 
         let tmpState = this.state;
