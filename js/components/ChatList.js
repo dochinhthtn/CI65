@@ -7,7 +7,7 @@ export default class ChatList extends BaseComponent {
 
         let $create = document.createElement('button');
         $create.innerHTML = '+ Create chat group';
-        $create.className = 'btn btn-primary btn-block';
+        $create.className = 'btn btn-primary btn-block mb-3';
 
         let $list = document.createElement('div');
         $list.className = 'list-group';

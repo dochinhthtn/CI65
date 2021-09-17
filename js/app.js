@@ -6,11 +6,12 @@
 import IndexScreen from "./screens/IndexScreen.js";
 import LoginScreen from "./screens/LoginScreen.js";
 import RegisterScreen from "./screens/RegisterScreen.js";
+import CreateChatGroupScreen from "./screens/CreateChatGroupScreen.js";
 
 import { appendTo } from "./utils.js";
 
 let $app = document.getElementById('app');
-appendTo($app, new IndexScreen());
+appendTo($app, new CreateChatGroupScreen());
 
 import data from './data/food.js';
 console.log(data);
