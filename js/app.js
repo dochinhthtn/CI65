@@ -3,6 +3,8 @@
 // + dùng đi dùng lại: 
 // + xử lý độc lập
 
+import "./router.js";
+
 import IndexScreen from "./screens/IndexScreen.js";
 import LoginScreen from "./screens/LoginScreen.js";
 import RegisterScreen from "./screens/RegisterScreen.js";
@@ -13,8 +15,8 @@ import { appendTo } from "./utils.js";
 let $app = document.getElementById('app');
 appendTo($app, new CreateChatGroupScreen());
 
-import data from './data/food.js';
-console.log(data);
+// import data from './data/food.js';
+// console.log(data);
 
 // $app.append(new RegisterScreen().render()); // render 1 lần duy nhất
 
