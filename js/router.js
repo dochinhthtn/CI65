@@ -4,6 +4,7 @@ import IndexScreen from "./screens/IndexScreen.js";
 import CreateChatGroupScreen from "./screens/CreateChatGroupScreen.js";
 
 import { appendTo } from "./utils.js";
+import { authStateChanged } from "./models/user.js";
 
 let router = new Navigo(null, true, '#');
 
@@ -20,6 +21,11 @@ router.on('/register', function() {
 }).resolve();
 
 router.on('/index', function() {
+    if(!auth.currentUser) {
+        router.navigate('/login');
+        return;
+    }
+
     $app.innerHTML = '';
     appendTo($app, new IndexScreen());
 }).resolve();

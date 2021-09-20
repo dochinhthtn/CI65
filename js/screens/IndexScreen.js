@@ -1,15 +1,28 @@
 import BaseComponent from "../BaseComponent.js";
 import AuthNavbar from "../components/AuthNavbar.js";
 import ChatList from "../components/ChatList.js";
+import { authStateChanged } from "../models/user.js";
 
 import { appendTo } from "../utils.js";
 
 export default class IndexScreen extends BaseComponent {
 
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            user: {
+                email: auth.currentUser.email,
+                name: auth.currentUser.displayName
+            }
+        }
+    }
+
     render() {
         let $container = document.createElement('div');
 
-        let _authNavbar = new AuthNavbar({ });
+        console.log(this.state.user);
+        let _authNavbar = new AuthNavbar({ name: this.state.user.name });
 
 
         let $content = document.createElement('div');

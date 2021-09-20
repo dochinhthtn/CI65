@@ -15,7 +15,9 @@ import { authStateChanged } from "./models/user.js";
 
 let $app = document.getElementById('app');
 
-authStateChanged();
+window.onload = function() {
+    authStateChanged();
+}
 // appendTo($app, new CreateChatGroupScreen());
 
 // import data from './data/food.js';
