@@ -1,15 +1,36 @@
+import LoginScreen from "./screens/LoginScreen.js";
+import RegisterScreen from "./screens/RegisterScreen.js";
+import IndexScreen from "./screens/IndexScreen.js";
+import CreateChatGroupScreen from "./screens/CreateChatGroupScreen.js";
+
+import { appendTo } from "./utils.js";
+
 let router = new Navigo(null, true, '#');
 
-router.on('/teacher', function() {
-    console.log('Đến nhà thầy giáo');
+let $app = document.getElementById('app');
+
+router.on('/login', function() {
+    $app.innerHTML = '';
+    appendTo($app, new LoginScreen());
 }).resolve();
 
-router.on('/lover', function() {
-    console.log('Đến nhà người yêu');
+router.on('/register', function() {
+    $app.innerHTML = '';
+    appendTo($app, new RegisterScreen());
 }).resolve();
 
-router.on('/old-girlfriend', function() {
-    console.log('Đến nhà người yêu cũ');
+router.on('/index', function() {
+    $app.innerHTML = '';
+    appendTo($app, new IndexScreen());
 }).resolve();
+
+router.on('/create-group', function() {
+    $app.innerHTML = '';
+    appendTo($app, new CreateChatGroupScreen());
+}).resolve();
+
+router.notFound(function() {
+    $app.innerHTML = "<h1>404 NOT FOUND</h1>";
+});
 
 window.router = router;

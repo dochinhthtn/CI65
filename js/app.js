@@ -11,9 +11,12 @@ import RegisterScreen from "./screens/RegisterScreen.js";
 import CreateChatGroupScreen from "./screens/CreateChatGroupScreen.js";
 
 import { appendTo } from "./utils.js";
+import { authStateChanged } from "./models/user.js";
 
 let $app = document.getElementById('app');
-appendTo($app, new CreateChatGroupScreen());
+
+authStateChanged();
+// appendTo($app, new CreateChatGroupScreen());
 
 // import data from './data/food.js';
 // console.log(data);
