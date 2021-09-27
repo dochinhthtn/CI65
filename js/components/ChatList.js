@@ -20,11 +20,20 @@ export default class ChatList extends BaseComponent {
 
         for (let item of this.props.conversations) {
             let $item = document.createElement('a');
+            $item.style.cursor = 'pointer';
             $item.innerHTML = `
                 <b>${item.groupName}</b><br>
                 <small>${item.members.length} members</small>
             `;
             $item.className = 'list-group-item list-group-item-action';
+            $item.onclick = () => {
+                if(!this.props.setCurrentConversation) return;
+                this.props.setCurrentConversation(item.id);
+            }
+
+            if(this.props.currentConversation) {
+                $item.className += (item.id == this.props.currentConversation.id) ? ' active' : '';
+            }
 
             $list.append($item);
         }

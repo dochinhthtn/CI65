@@ -5,7 +5,7 @@ import ChatList from "../components/ChatList.js";
 import MessageList from "../components/MessageList.js";
 import SendMessageForm from "../components/SendMessageForm.js";
 
-import { getConversations } from "../models/conversation.js";
+import { getConversations, listenConversationChanged } from "../models/conversation.js";
 import { authStateChanged } from "../models/user.js";
 
 import { appendTo } from "../utils.js";
@@ -21,13 +21,27 @@ export default class IndexScreen extends BaseComponent {
                 name: auth.currentUser.displayName
             },
             conversations: [],
+            currentConversation: null
         }
     }
 
     async componentDidMount() {
+
+        listenConversationChanged();
+
         let tmpState = this.state;
         tmpState.conversations = await getConversations();
         this.setState(tmpState);
+    }
+
+    setCurrentConversation = (conversationId) => {
+        let conversation = this.state.conversations.find(item => item.id == conversationId);
+        if (!conversation) return;
+
+        let tmpState = this.state;
+        tmpState.currentConversation = conversation;
+        this.setState(tmpState);
+        console.log(this.state.currentConversation);
     }
 
     render() {
@@ -39,17 +53,22 @@ export default class IndexScreen extends BaseComponent {
 
         let $asideLeft = document.createElement('div');
         $asideLeft.className = 'col-sm-3'; // chiếm 3 đơn vị cột / 12 đơn vị
-        appendTo($asideLeft, new ChatList({ conversations: this.state.conversations }));
+        appendTo($asideLeft, new ChatList({ 
+            conversations: this.state.conversations, 
+            currentConversation: this.state.currentConversation,
+
+            setCurrentConversation: this.setCurrentConversation 
+        }));
 
         let $center = document.createElement('div');
         $center.className = 'col-sm-9';
         appendTo(
-            $center, 
-            new MessageList({ user: this.state.user }),
-            new SendMessageForm()
+            $center,
+            new MessageList({ user: this.state.user, currentConversation: this.state.currentConversation }),
+            new SendMessageForm({ currentConversation: this.state.currentConversation })
         );
 
-        $content.append($asideLeft, $center); 
+        $content.append($asideLeft, $center);
         appendTo($container, _authNavbar);
         $container.append($content);
 
