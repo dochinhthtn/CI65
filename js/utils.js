@@ -17,3 +17,18 @@ export function appendTo($element, ...components) {
         $element.appendChild(child);
     }
 }
+
+
+export function getDataFromDoc(doc) {
+    let data = doc.data();
+    data.id = doc.id;
+    return data;
+}
+
+export function getDataFromDocs(docs) {
+    let result = [];
+    for(let doc of docs) {
+        result.push(getDataFromDoc(doc));
+    }
+    return result;
+}

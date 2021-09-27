@@ -5,6 +5,7 @@ export default class BaseComponent {
      * @type {HTMLElement}
      */
     $element;
+    _isFirstRender = true;
 
     constructor(props) {
         this.props = props;
@@ -20,10 +21,6 @@ export default class BaseComponent {
 
     }
 
-    afterRender() {
-
-    }
-
     /**
      * Thiết lập lại state của component và render lại component (Khi state thay đổi, component render lại)
      * 
@@ -33,15 +30,24 @@ export default class BaseComponent {
         this.refresh();
     }
 
-    // thay đổi lại giao diện cho phù hợp với trạng thái hiện tại
+    // thực thi 1 lần duy nhất, sau khi component render lần đầu tiên
+    componentDidMount() {
+        
+    }
+
+    // thay đổi lại nội dung của component cho phù hợp với trạng thái hiện tại
     refresh() {
         let $element = this.render();
+
+        if(this._isFirstRender) {
+            this.componentDidMount();
+            this._isFirstRender = false;
+        }
 
         if(this.$element) {
             this.$element.replaceWith($element);
         }
         this.$element = $element;
-        this.afterRender();
         return this.$element;
     }
 }

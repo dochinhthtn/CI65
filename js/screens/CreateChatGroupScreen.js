@@ -40,7 +40,7 @@ export default class CreateChatGroupScreen extends BaseComponent {
         this.setState(tmpState);
     }
 
-    handleSubmit = (event) => {
+    handleSubmit = async (event) => {
         event.preventDefault();
         let tmpState = this.state;
         let data = tmpState.data;
@@ -65,7 +65,8 @@ export default class CreateChatGroupScreen extends BaseComponent {
         }
 
         if(isPassed) {
-            createConversation(this.state.data);
+            await createConversation(this.state.data);
+            router.navigate('/index');
         }
 
         this.setState(tmpState);
@@ -80,9 +81,11 @@ export default class CreateChatGroupScreen extends BaseComponent {
 
         let $form = document.createElement('form');
         $form.onsubmit = this.handleSubmit;
+        $form.className = 'container mt-3';
 
         let $formTitle = document.createElement('h4');
         $formTitle.innerHTML = 'Create chat group';
+        $formTitle.className = 'text-center';
 
         let _groupName = new InputWrapper({
             placeholder: 'Group name',
